@@ -6,14 +6,16 @@ let diasTasaMasAlta;
 let continuarSimulando;
 let rendimientos;
 let cdt;
+let tablaTasas;
+let rangoDias;
+let rangoMontos;
 
+
+const navBar = document.getElementById("navBar")
 const links = [
     {text: "Inicio", url: "./index.html"},
     {text: "Simulador", url: "./simulador.html"},
 ]
-
-const navBar = document.getElementById("navBar")
-
 links.forEach(link =>{
 
     const ancla = document.createElement('a');
@@ -23,19 +25,18 @@ links.forEach(link =>{
     navBar.appendChild(ancla);
 })
 
-
-let tablaTasas = [
-        [9.4, 9.5, 10.4, 10.5, 10.6, 10.75, 10.65, 10.25, 9.5, 9.2, 9.2, 9.2],
-        [9.4, 9.5, 10.4, 10.5, 10.6, 10.75, 10.65, 10.25, 9.6, 9.3, 9.3, 9.3],
-        [9.5, 9.6, 10.5, 10.6, 10.7, 10.85, 10.75, 10.35, 9.7, 9.4, 9.4, 9.4],
-        [9.6, 9.7, 10.6, 10.65, 10.75, 10.9, 10.8, 10.45, 9.8, 9.5, 9.5, 9.5],
-        [9.6, 9.7, 10.6, 10.65, 10.75, 10.9, 10.8, 10.45, 9.8, 9.5, 9.5, 9.5],
-        [9.7, 9.8, 10.7, 10.75, 10.85, 11.00, 10.9, 10.55, 9.9, 9.6, 9.6, 9.6],
-        [9.7, 9.8, 10.7, 10.75, 10.85, 11.00, 10.9, 10.55, 9.9, 9.6, 9.6, 9.6],
-        [9.3, 9.4, 10.2, 10.25, 10.35, 10.45, 10.4, 10.4, 9.6, 9.3, 9.3, 9.3],
-];
-let rangoDias = [30, 60, 90, 120, 150, 180, 240, 360, 540, 720, 1080, 1440, 1799];
-let rangoMontos = [500, 5000, 20000, 50000, 200000, 500000, 1000000, 5000000];
+function cargarJson(){
+    fetch('tablas.json')
+    .then(function(res){
+        return res.json();
+    })
+    .then(function(data){
+        tablaTasas = data.tasas;
+        rangoDias = data.rangoDias;
+        rangoMontos = data.rangoMontos;
+    })
+    .catch(error => console.log(error))
+}
 
 function asignarTexto (elemento, texto){
     let elementoHTML = document.querySelector(elemento);
@@ -149,7 +150,7 @@ form.addEventListener("submit", (event) => {
    
 });
 
-
+cargarJson();
 asignarTexto('#title-cdt','Simulador Rendimientos CDT');
 asignarTexto('#text-description-cdt', 'Por favor ingrese el valor que quiere invertir (minimo 500) y a cuantos días quiere su CDT (minimo 30 maximo 1799)');
 
