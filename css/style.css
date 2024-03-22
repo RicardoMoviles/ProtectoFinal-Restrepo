@@ -1,0 +1,29 @@
+.navbar{
+    color: white;
+}
+
+#info-card{
+    width: 50%;
+    margin: 5% auto;
+}
+
+#info-card-rendimiento{
+    width: 50%;
+    margin: 0 auto ;
+    background-color:#93BBBF  ;
+}
+
+#card-simulador{
+    width: 50%; 
+    margin: 5% auto;
+    background-color:#93BBBF  ;
+}
+
+body{
+    background-color: azure;
+}
+
+a {
+    padding-left: 30px;
+    padding-right: 30px;
+}
